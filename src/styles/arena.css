@@ -1,0 +1,454 @@
+/* Spy Words — board & card visual styling.
+   Loaded via `style.css` in the Hub embed + standalone. */
+
+.codenames-board {
+  display: grid;
+  gap: clamp(8px, 1.2vw, 16px);
+  width: 100%;
+  margin: 0 auto;
+  padding: clamp(12px, 1.6vw, 22px);
+  border-radius: 24px;
+  background:
+    radial-gradient(120% 120% at 50% 0%, rgba(30, 41, 59, 0.75), rgba(15, 23, 42, 0.9)),
+    linear-gradient(180deg, rgba(15, 23, 42, 0.95), rgba(9, 14, 26, 0.98));
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 24px 60px -20px rgba(0, 0, 0, 0.85);
+  perspective: 1200px;
+}
+
+/* Active team subtle outer glow on board */
+.codenames-board-team-red {
+  border-color: rgba(239, 68, 68, 0.45);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0 35px -5px rgba(239, 68, 68, 0.25),
+    0 24px 60px -20px rgba(0, 0, 0, 0.85);
+}
+.codenames-board-team-blue {
+  border-color: rgba(59, 130, 246, 0.45);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0 35px -5px rgba(59, 130, 246, 0.25),
+    0 24px 60px -20px rgba(0, 0, 0, 0.85);
+}
+
+/* 3D flip card — wider ratio 16/10 to give more horizontal room */
+.codenames-card {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: default;
+  perspective: 900px;
+}
+
+.codenames-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 520ms cubic-bezier(0.4, 0.15, 0.2, 1);
+  border-radius: 14px;
+  box-shadow: 0 8px 18px -8px rgba(0, 0, 0, 0.55);
+}
+
+.codenames-card-inner.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.codenames-card-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  border-radius: 14px;
+  padding: 4px 6px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  overflow: hidden;
+}
+
+.codenames-card-cover {
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
+}
+
+.codenames-card-revealed {
+  transform: rotateY(180deg);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+/* Word text styling — strictly single line, no line break */
+.codenames-card-word {
+  font-family: "Outfit", "Geist Variable", sans-serif;
+  font-weight: 800;
+  font-size: clamp(0.65rem, 1.55vw, 1.2rem);
+  letter-spacing: 0.01em;
+  line-height: 1.1;
+  text-transform: uppercase;
+  white-space: nowrap;
+  word-break: keep-all;
+  overflow: hidden;
+  text-overflow: clip;
+}
+
+.codenames-card-tag {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.15em;
+  font-weight: 700;
+  opacity: 0.85;
+}
+
+.codenames-card-secret {
+  position: absolute;
+  top: 3px;
+  right: 5px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  opacity: 0.9;
+}
+
+/* Guessable hover micro-interaction */
+.codenames-card-guessable {
+  cursor: pointer;
+}
+.codenames-card-guessable:hover .codenames-card-inner,
+.codenames-card-guessable:focus-visible .codenames-card-inner {
+  transform: translateY(-4px) scale(1.015);
+  box-shadow: 0 14px 24px -10px rgba(0, 0, 0, 0.6);
+}
+.codenames-card-guessable:active .codenames-card-inner {
+  transform: translateY(-1px) scale(0.99);
+}
+
+.codenames-cell {
+  min-height: 0;
+}
+
+/* Header */
+.game-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 4px 12px;
+  border-bottom: 1px solid rgba(120, 140, 170, 0.18);
+  margin-bottom: 12px;
+}
+.game-logo {
+  font-family: "Outfit", sans-serif;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  font-size: 1.25rem;
+  background: linear-gradient(90deg, #fbbf24, #f97316);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  white-space: nowrap;
+}
+.game-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.game-quit {
+  font-size: 0.75rem;
+  padding: 6px 12px;
+  border-radius: 12px;
+  background: rgba(127, 29, 29, 0.2);
+  border: 1px solid rgba(127, 29, 29, 0.35);
+  color: #fb7185;
+  font-weight: 700;
+  transition: background 0.15s ease;
+}
+.game-quit:hover {
+  background: rgba(127, 29, 29, 0.35);
+}
+
+/* Clue input panel */
+.clue-input-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px;
+  border-radius: 20px;
+  background: rgba(20, 28, 42, 0.55);
+  border: 1px solid rgba(120, 140, 170, 0.18);
+  box-shadow: 0 12px 30px -16px rgba(0, 0, 0, 0.6);
+}
+.clue-title {
+  font-family: "Outfit", sans-serif;
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: #fcd34d;
+}
+.clue-hint {
+  font-size: 0.78rem;
+  color: #a1a1aa;
+}
+.clue-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.clue-word-input {
+  flex: 1 1 220px;
+}
+.clue-count-input {
+  width: 80px;
+}
+.clue-submit {
+  padding: 10px 18px;
+  border-radius: 14px;
+  font-weight: 800;
+  background: linear-gradient(90deg, #f59e0b, #f97316);
+  color: #1a1206;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.12s ease, filter 0.12s ease;
+}
+.clue-submit:hover:not(:disabled) {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+}
+.clue-submit:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.clue-error {
+  color: #fb7185;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+/* Agent turn panel */
+.agent-turn-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px;
+  border-radius: 20px;
+  background: rgba(20, 28, 42, 0.55);
+  border: 1px solid rgba(120, 140, 170, 0.18);
+  box-shadow: 0 12px 30px -16px rgba(0, 0, 0, 0.6);
+  align-items: stretch;
+}
+.clue-banner {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-family: "Outfit", sans-serif;
+  font-weight: 800;
+}
+.clue-banner-word {
+  font-size: 1.5rem;
+  color: #f4f4f5;
+}
+.clue-banner-count {
+  font-size: 1.5rem;
+  color: #fcd34d;
+}
+.clue-banner-pending {
+  font-size: 0.95rem;
+  color: #a1a1aa;
+  font-weight: 600;
+}
+.agent-quota {
+  font-size: 0.85rem;
+  color: #d4d4d8;
+}
+.agent-pass {
+  padding: 10px 16px;
+  border-radius: 14px;
+  font-weight: 800;
+  background: rgba(63, 63, 70, 0.6);
+  border: 1px solid rgba(120, 140, 170, 0.25);
+  color: #f4f4f5;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.agent-pass:hover:not(:disabled) {
+  background: rgba(82, 82, 91, 0.7);
+}
+.agent-pass:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* Team scoreboard */
+.team-scoreboard {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 16px;
+  border-radius: 18px;
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  backdrop-filter: blur(12px);
+}
+.team-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-family: "Outfit", sans-serif;
+  border: 1px solid transparent;
+}
+.team-pill-red {
+  background: rgba(220, 38, 38, 0.18);
+  border-color: rgba(220, 38, 38, 0.4);
+  color: #fca5a5;
+}
+.team-pill-blue {
+  background: rgba(37, 99, 235, 0.18);
+  border-color: rgba(37, 99, 235, 0.4);
+  color: #93c5fd;
+}
+.team-pill-active {
+  box-shadow: 0 0 0 2px rgba(252, 211, 77, 0.6);
+}
+
+/* Game over banner */
+.game-over-banner {
+  text-align: center;
+  padding: 24px;
+  border-radius: 20px;
+  background: rgba(20, 28, 42, 0.65);
+  border: 1px solid rgba(120, 140, 170, 0.25);
+  box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.7);
+}
+.game-over-title {
+  font-family: "Outfit", sans-serif;
+  font-weight: 900;
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+.game-over-title-red {
+  color: #f87171;
+}
+.game-over-title-blue {
+  color: #60a5fa;
+}
+
+/* Team columns (players per team) */
+.team-column {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 14px;
+  border-radius: 16px;
+  border: 1px solid transparent;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.team-column-red {
+  background: rgba(220, 38, 38, 0.12);
+  border-color: rgba(220, 38, 38, 0.3);
+}
+.team-column-blue {
+  background: rgba(37, 99, 235, 0.12);
+  border-color: rgba(37, 99, 235, 0.3);
+}
+.team-column-active {
+  box-shadow: 0 0 0 2px rgba(252, 211, 77, 0.55);
+}
+.team-column-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Outfit", sans-serif;
+  font-weight: 800;
+}
+.team-column-emoji {
+  font-size: 1.1rem;
+}
+.team-column-name {
+  font-size: 0.95rem;
+}
+.team-column-red .team-column-name {
+  color: #fca5a5;
+}
+.team-column-blue .team-column-name {
+  color: #93c5fd;
+}
+.team-column-remaining {
+  margin-left: auto;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #d4d4d8;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+.team-column-players {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.team-column-empty {
+  color: #71717a;
+  font-size: 0.8rem;
+}
+.team-player {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(9, 9, 11, 0.5);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+.team-player-me {
+  border-color: rgba(252, 211, 77, 0.6);
+  background: rgba(252, 211, 77, 0.12);
+}
+.team-player-disconnected {
+  opacity: 0.45;
+  text-decoration: line-through;
+}
+.team-player-avatar {
+  font-size: 0.9rem;
+}
+.team-player-role {
+  font-size: 0.7rem;
+}
+
+/* Doubt mark badge (right-click) */
+.codenames-card-doubt .codenames-card-inner {
+  box-shadow: 0 0 0 2px rgba(252, 211, 77, 0.7), 0 8px 18px -8px rgba(0, 0, 0, 0.55);
+}
+.codenames-card-doubt-badge {
+  position: absolute;
+  top: 4px;
+  left: 6px;
+  font-size: 0.9rem;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4));
+  animation: codenames-doubt-pop 0.25s ease;
+  pointer-events: none;
+}
+@keyframes codenames-doubt-pop {
+  0% { transform: scale(0.4); opacity: 0; }
+  60% { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}

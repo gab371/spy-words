@@ -1,0 +1,10 @@
+{
+  "key": "spy",
+  "name": "Spy Words",
+  "emoji": "🕵️",
+  "desc": "Mots P2P par équipes Rouge / Bleue — Masterminds & Agents.",
+  "hasPreConfig": true,
+  "avatars": ["🕵️", "🔴", "🔵", "🗝️", "📜", "🕶️", "🔎", "🧩"],
+  "shellBackground": "radial-gradient(circle at center, #0a0f1a 0%, #09090b 100%)",
+  "repo": "gab371/spy-words"
+}
